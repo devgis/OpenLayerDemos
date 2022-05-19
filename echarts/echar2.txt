@@ -1,0 +1,108 @@
+?<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <link href="../../Scripts/easyui/themes/gray/easyui.css" rel="stylesheet" />
+    <link href="../../Scripts/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="../../Theme/Index.css" rel="stylesheet" />
+    <script src="../../Scripts/easyui/jquery.min.js"></script>
+    <script src="../../Scripts/easyui/jquery.easyui.min.js"></script>
+    <script src="../../Scripts/v3.10.1/build/ol.js"></script>
+    <script src="../../Scripts/echarts/dist/echarts.js"></script>
+    <script src="../../Js/index.js"></script>
+
+    <title>风场发电项目管理系统</title>
+    <style>
+        .echartsCls {
+        }
+    </style>
+</head>
+<body class="easyui-layout">
+
+    <div id="layoutnorth" class="layoutnorth" data-options="region:'north'"></div>
+    <div id="layouteast" class="layoutwest" data-options="region:'west',title:'系统菜单'"></div>
+    <div id="layoutcenter" class=" layoutcenter" data-options="region:'center',title:'地图'">
+        <div id="map" style="width: 100%; height: 100%">
+        </div>
+    </div>
+    <div id="layoutsouth" class="layoutsouth" data-options="region:'south'">
+    </div>
+    <div class="echartsCls" style="width: 150px; height:150px; display: none" id="sx"></div>
+    <div class="echartsCls" style="width:200px; height: 200px; display: none" id="gz"></div>
+    <script type="text/javascript">
+
+        var map;
+        var initialCenter = [11060743.740978144, 4622911.47068746];
+        var initialZoom = 5;
+        var source = new ol.source.OSM({
+            url: 'http://{a-c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
+        });
+        var layer = new ol.layer.Tile({
+            visible: true,
+            source: source
+        });
+        //var overlayer=new ol.Overlay()
+        $(function () {
+            initmap();
+            initCharts();
+        });
+        function initmap() {
+            map = new ol.Map({
+                layers: [layer],
+                target: "map",
+                view: new ol.View({
+                    center: initialCenter,
+                    zoom: initialZoom,
+                    projection: 'EPSG:3857'
+                })
+
+            });
+        }
+
+        //鼠标滚动事件 查看 地图级别
+        document.getElementById("map").onmousewheel = function (event) {
+
+        }
+        var sx;
+        var gz;
+        function initCharts() {
+            require.config({
+                paths: {
+                    echarts: '/Scripts/echarts/dist'
+                }
+            });
+            require(['echarts', 'echarts/chart/line',
+                   'echarts/chart/pie',
+		          'echarts/chart/bar'// 使用柱状图就加载bar模块，按需加载
+		// 使用柱状图就加载bar模块，按需加载
+            ], function (ec, theme) {
+                th = theme;
+                sx = ec.init(document.getElementById('sx'), theme);
+                gz = ec.init(document.getElementById('gz'), theme);
+                sx.setOption(optionsL(null), true);
+                gz.setOption(optionsC(null), true);
+                $(".echartsCls").css("display", "");
+                var overlayer = new ol.Overlay({
+                    element: document.getElementById("sx"),
+                    offset: [0, -15],
+                    positioning: 'bottom-center'
+                });
+                overlayer.setPosition([11060743.740978144, 4622911.47068746]);
+                var gzover = new ol.Overlay({
+                    element: document.getElementById("gz"),
+                    offset: [0, -15],
+                    positioning: 'bottom-center'
+                });
+                gzover.setPosition([11060743.740978144, 3622911.47068746]);
+                map.addOverlay(overlayer);
+                map.addOverlay(gzover);
+
+            });
+        }
+
+    </script>
+</body>
+</html>

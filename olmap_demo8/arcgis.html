@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tiled ArcGIS MapServer</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.13.0/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.13.0/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      var url = 'http://192.168.0.106:6080/arcgis/rest/services/ShaanXi/MapServer' +
+          'Specialty/ESRI_StateCityHighway_USA/MapServer';
+
+      var layers = [
+        new ol.layer.Tile({
+          extent: [-180, -90, 180, 90],
+          source: new ol.source.TileArcGISRest({
+            url: url
+          })
+        })
+      ];
+      var map = new ol.Map({
+        layers: layers,
+        target: 'map',
+        view: new ol.View({
+          center: [-10997148, 4569099],
+          zoom: 4
+        })
+      });
+    </script>
+  </body>
+</html>

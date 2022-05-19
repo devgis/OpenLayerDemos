@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 99%;
+            border: 1px solid black;
+        }
+	body {
+	  padding:0px; 
+	  margin:2px
+	}
+	#labs {
+	 position:absolute;
+	 bottom:15px;
+	 left:7px;
+	 font-size:smaller;
+	 z-index: 5000;
+        }	 
+    </style>
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    <script type="text/javascript">
+        <!--
+        var map, layer;
+
+        function init(){
+
+             var map = new OpenLayers.Map(
+                  { 
+                     div: "map",
+                    //下面很重要，如果不设置，每个图片都按照BBOX:-180,-90,90-270这样的经纬度去找，对于用meters来做的mapfile是找不到图的，白屏
+                     maxExtent: new OpenLayers.Bounds(107.0,36.9,111.9,41.5),
+                     maxResolution: "auto",
+                     units: 'METERS',
+                     projection: "EPSG:4326"
+                   }
+             );
+             //"http://192.168.0.63:8001/cgi-bin/xmap.exe?LAYERS=qxj&MODE=MAP", 
+             //http://192.168.0.63:8001/cgi-bin/xmap.exe?LAYERS=qxj&FORMAT=gif&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&SRS=EPSG%3A4326&BBOX=90,30,120,80&WIDTH=800&HEIGHT=600
+          /*
+          var layer = new OpenLayers.Layer.WMS( 
+              "OpenPlayer WMS",
+              "http://192.168.0.63:8001/cgi-bin/xmap.exe?", 
+              {IMAGETYPE:'PNG'
+                ,Layers:"xz,s,qx,djs,dy,cz,p26ggcs,p25dxfw,p24fjms,p23ssxzf,p22qcfw,p21cyfw,p20zhxx,p19zzxq,p18gygc,p17gsqy,p16kyjy,p15ylfw,p14xxyl,p13bgjd,p12lshy,p11syds,p10jrfw,p09sfz,p08gsffq,p07tcc,p06jyzjqz,p04qcz,p02hczdtz,p02jc,p01zf,ssj,sj,qxj,qcqj,hpsk,hl,gnq,gyld,xd,tl,sqzl,sqdl,ssd,rxd,qtdl,gds,gd,gsgls,gjgl"
+                ,SRS:"EPSG:4326"
+                ,Mode="tile"}
+                */
+                
+                var layer = new OpenLayers.Layer.WMS( 
+              "OpenPlayer WMS",
+              "http://192.168.0.63:8001/cgi-bin/xmap.exe?VERSION=1.1.1&REQUEST=GetMap&STYLES=&SRS=EPSG%3A4326", 
+              {IMAGETYPE:'PNG'
+                ,Layers:"xz,s,qx,djs,dy,cz,p26ggcs,p25dxfw,p24fjms,p23ssxzf,p22qcfw,p21cyfw,p20zhxx,p19zzxq,p18gygc,p17gsqy,p16kyjy,p15ylfw,p14xxyl,p13bgjd,p12lshy,p11syds,p10jrfw,p09sfz,p08gsffq,p07tcc,p06jyzjqz,p04qcz,p02hczdtz,p02jc,p01zf,ssj,sj,qxj,qcqj,hpsk,hl,gnq,gyld,xd,tl,sqzl,sqdl,ssd,rxd,qtdl,gds,gd,gsgls,gjgl"
+                ,SRS:"EPSG:4326"}
+          );
+          map.addLayer(layer); 
+          //缩放级别，以maxExtent的左上角为基点缩放
+          map.setCenter(new OpenLayers.LonLat(109.77,38.3), 1);   
+          map.addControl( new OpenLayers.Control.LayerSwitcher() ); 
+
+
+            
+            /*
+             map = new OpenLayers.Map('map');
+              layer = new OpenLayers.Layer.WMS( "OpenLayers WMS",
+                    "http://192.168.0.63:8001/cgi-bin/mapserv.exe?MAP=D:/ms4w/Apache/htdocs/yulin.map&MODE=MAP&", {layers: 'qxj'} );
+            //layer = new OpenLayers.Layer.WMS(“Base Layer”, "http://192,168.0.63:8001/cgi-bin/mapserv.exe?" , {layers: 'qxj',map:'D:/ms4w/Apache/htdocs/yulin.map'，IMAGETYPE:'PNG'}, {isBaseLayer: true});
+            //layer = new OpenLayers.Layer.WMS( "yulinmap", 
+            //        "http://192.168.0.63:8001/cgi-bin/mapserv.exe?MAP=D:/ms4w/Apache/htdocs/yulin.map&LAYERS=ALL&MODE=MAP", {layers: 'yulinmap', format: 'image/png' } );
+            
+            //layer = new OpenLayers.Layer.WMS("layer1", "http://localhost:8001/cgi-bin/xmap.exe?",{ layers: 'qxj',transparent: "true",IMAGETYPE: 'PNG'}, { isBaseLayer: false});
+            map.addLayer(layer);
+            
+ 
+                map.addControl(new OpenLayers.Control.LayerSwitcher());
+                // map.setCenter(new OpenLayers.LonLat(0, 0), 0);
+                map.zoomToMaxExtent();
+                
+                var click = new OpenLayers.Control.Click();
+                map.addControl(click);
+                click.activate();
+                */
+                
+                
+            //map.addControl(new OpenLayers.Control.Permalink());
+            
+            /*
+            map = new OpenLayers.Map( $('map'), {'maxResolution': 360/512});
+            layer = new OpenLayers.Layer.WMS( "qxj", 
+                    "http://192.168.0.63:8001/tilecache/tilecache.cgi?", {layers: 'qxj', format: 'image/png' } );
+            map.addLayer(layer);
+            map.addControl(new OpenLayers.Control.Permalink());
+            if (!map.getCenter()) map.zoomToMaxExtent();
+            */
+
+        }
+        // -->
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="map">
+    <div id="labs">From <a href="http://labs.metacarta.com/">MetaCarta Labs</a>.</div>
+    </div>
+  </body>
+</html>

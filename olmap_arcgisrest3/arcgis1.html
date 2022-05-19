@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tiled ArcGIS MapServer</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.13.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.13.1/build/ol.js"></script>
+    
+    <!--
+    <link rel="stylesheet" href="js/ol.css" type="text/css">
+    <script src="js/ol-debug.js"></script>
+    -->
+    
+    
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      var url = 'http://192.168.0.106:6080/arcgis/rest/services/ShaanXi/MapServer';
+      //var param={'SIZE':'256*256','DPI':96};
+      var tilelayer=new ol.layer.Tile({
+          //extent: [-13884991, 2870341, -7455066, 6338219],
+          //center: [-10997148, 4569099], //extent: [-13884991, 2870341, -7455066, 6338219], //extent: [-180, -90, 180, 90], //
+          source: new ol.source.TileArcGISRest({
+            url: url
+            /*
+            params: {
+                FORMAT: "png32",
+                DPI: 96
+            }
+            */
+            //params:[{'SIZE':'SIZE=256*256'},{'DPI':'DPI=96'}] //params:[{SIZE:'256*256',FORMAT:'PNG32'}]//
+          })
+        });
+        
+      var layers = [
+          /*
+        new ol.layer.Tile({
+          source: new ol.source.MapQuest({layer: 'sat'})
+        }),
+        */
+        tilelayer
+        /*
+        new ol.layer.Tile({
+          //extent: [-13884991, 2870341, -7455066, 6338219],
+          center: [-10997148, 4569099], //extent: [-13884991, 2870341, -7455066, 6338219], //extent: [-180, -90, 180, 90], //
+          source: new ol.source.TileArcGISRest({
+            url: url,
+            params:{
+    'SIZE': '256*256',
+    'DPI': 96}
+            //params:['SIZE=256*256','FORMAT=PNG32','DPI=96'] //params:[{SIZE:'256*256',FORMAT:'PNG32'}]//
+          })
+        })
+        */
+      ];
+      var map = new ol.Map({
+        layers: layers,
+        target: 'map',
+        resolution:96,
+        resolutions: [0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.0003433227539,0.0001716613769,0.0000858306884,0.0000429153442,0.0000214576721,0.0000107288360,0.0000053644180,0.0000026822090,0.0000013411045], //[1.40625,0.703125,0.3515625,0.17578125,0.087890625,0.0439453125],
+        view: new ol.View({
+          center: [108, 34], //center: [-10997148, 4569099],
+          //zoom: 10,
+          projection:'EPSG:4326'
+        })
+      });
+    </script>
+  </body>
+</html>

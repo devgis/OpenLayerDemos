@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tiled ArcGIS MapServer</title>
+    <link rel="stylesheet" href="js/ol.css" type="text/css">
+    <script src="js/ol-debug.js"></script>
+    <!--
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.13.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.13.1/build/ol.js"></script>
+    -->
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      var url = 'http://192.168.0.106:6080/arcgis/rest/services/ShaanXi/MapServer';
+      var layers = [
+          /*
+        new ol.layer.Tile({
+          source: new ol.source.MapQuest({layer: 'sat'})
+        }),
+        */
+        new ol.layer.Tile({
+          //extent: [-13884991, 2870341, -7455066, 6338219],
+          center: [-10997148, 4569099], //extent: [-13884991, 2870341, -7455066, 6338219], //extent: [-180, -90, 180, 90], //
+          source: new ol.source.TileArcGISRest({
+            url: url,
+            params:[{SIZE:'256*256',FORMAT:'PNG32'}]//params:['SIZE=256*256','FORMAT=PNG32']
+          })
+        })
+      ];
+      var map = new ol.Map({
+        layers: layers,
+        target: 'map',
+        resolution:256,
+        view: new ol.View({
+          center: [108, 34], //center: [-10997148, 4569099],
+          zoom: 8,
+          projection:'EPSG:4326'
+        })
+      });
+    </script>
+  </body>
+</html>

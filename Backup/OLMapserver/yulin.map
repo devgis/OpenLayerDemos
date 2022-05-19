@@ -1,0 +1,853 @@
+MAP
+NAME"YL-MAP"
+# Map image size
+SIZE 256 256
+EXTENT -180 -90 180 90
+#EXTENT 109.0 36.9 109.9 39.5
+SHAPEPATH "YLData"
+UNITS meters
+PROJECTION
+'proj=longlat'
+'ellps=WGS84'
+'towgs84=0,0,0,0,0,0,0'
+'no_defs'
+END
+
+# Backgroundcolor for the map canvas -- change as desired
+#IMAGECOLOR 255 255 255
+#IMAGEQUALITY 95
+#IMAGETYPE agg
+#OUTPUTFORMAT
+#NAME agg
+#DRIVER AGG/PNG
+#IMAGEMODE RGB
+#END
+# Legend
+#END
+# Web interfacedefinition. Only the template parameter
+# is required todisplay a map. See MapServer documentation
+WEB
+# Set IMAGEPATHto the path where MapServer should
+# write itsoutput.
+IMAGEPATH'D:/ms4w/tmp/'
+
+# Set IMAGEURLto the url that points to IMAGEPATH
+# as defined inyour web server configuration
+IMAGEURL'/tmp/'
+METADATA
+ "wfs_srs"            "EPSG:4326 EPSG:4269" 
+ "wfs_enable_request" "*"
+ "wms_enable_request" "*"
+ "wms_srs"            "EPSG:4326 EPSG:4269 " 
+END
+# WMS serversettings
+#Scale range atwhich web interface will operate
+# Template andheader/footer settings
+# Only thetemplate parameter is required to display a map. See MapServer documentation
+TEMPLATE'fooOnlyForWMSGetFeatureInfo'
+END
+
+LAYER
+  NAME "xz"
+  METADATA
+    "DESCRIPTION" "xz"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "XZ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 100 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "s"
+  METADATA
+    "DESCRIPTION" "s"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "S_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 255 2
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "qx"
+  METADATA
+    "DESCRIPTION" "qx"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "QX_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "djs"
+  METADATA
+    "DESCRIPTION" "djs"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "DJS_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "dy"
+  METADATA
+    "DESCRIPTION" "dy"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "DY_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "cz"
+  METADATA
+    "DESCRIPTION" "cz"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "CZ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p26ggcs"
+  METADATA
+    "DESCRIPTION" "p26ggcs"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P26GGCS_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p25dxfw"
+  METADATA
+    "DESCRIPTION" "p25dxfw"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P01ZF_point"
+  CLASS
+    NAME "P25DXFW_point"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+
+LAYER
+  NAME "p24fjms"
+  METADATA
+    "DESCRIPTION" "p24fjms"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P24FJMS_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+
+LAYER
+  NAME "p23ssxzf"
+  METADATA
+    "DESCRIPTION" "p23ssxzf"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P23SSXZF_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p22qcfw"
+  METADATA
+    "DESCRIPTION" "p22qcfw"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P22QCFW_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p21cyfw"
+  METADATA
+    "DESCRIPTION" "p21cyfw"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P01ZF_point"
+  CLASS
+    NAME "P21CYFW_point"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p20zhxx"
+  METADATA
+    "DESCRIPTION" "p20zhxx"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P20ZHXX_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p19zzxq"
+  METADATA
+    "DESCRIPTION" "p19zzxq"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P19ZZXQ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p18gygc"
+  METADATA
+    "DESCRIPTION" "p18gygc"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P18GYGC_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p17gsqy"
+  METADATA
+    "DESCRIPTION" "p17gsqy"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P17GSQY_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p16kyjy"
+  METADATA
+    "DESCRIPTION" "p16kyjy"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P16KYJY_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p15ylfw"
+  METADATA
+    "DESCRIPTION" "p15ylfw"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P15YLFW_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p14xxyl"
+  METADATA
+    "DESCRIPTION" "p14xxyl"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P14XXYL_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p13bgjd"
+  METADATA
+    "DESCRIPTION" "p13bgjd"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P13BGJD_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p12lshy"
+  METADATA
+    "DESCRIPTION" "p12lshy"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P12LSHY_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+
+LAYER
+  NAME "p11syds"
+  METADATA
+    "DESCRIPTION" "p11syds"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P11SYDS_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p10jrfw"
+  METADATA
+    "DESCRIPTION" "p10jrfw"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P10JRFW_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+
+LAYER
+  NAME "p09sfz"
+  METADATA
+    "DESCRIPTION" "p09sfz"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P09SFZ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p08gsffq"
+  METADATA
+    "DESCRIPTION" "p08gsffq"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P08GSFFQ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p07tcc"
+  METADATA
+    "DESCRIPTION" "p07tcc"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P07TCC_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p06jyzjqz"
+  METADATA
+    "DESCRIPTION" "p06jyzjqz"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P06JYZJQZ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p04qcz"
+  METADATA
+    "DESCRIPTION" "p04qcz"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P04QCZ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p02hczdtz"
+  METADATA
+    "DESCRIPTION" "p02hczdtz"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P02HCZDTZ_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p02jc"
+  METADATA
+    "DESCRIPTION" "p02jc"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P02JC_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "p01zf"
+  METADATA
+    "DESCRIPTION" "p01zf"
+  END
+  TYPE POINT
+  STATUS OFF
+  DATA "P01ZF_point"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "ssj"
+  METADATA
+    "DESCRIPTION" "ssj"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "SSJ_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 200 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "sj"
+  METADATA
+    "DESCRIPTION" "sj"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "SJ_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 100 0 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "qxj"
+  METADATA
+    "DESCRIPTION" "qxj"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "QXJ_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 20 100 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "qcqj"
+  METADATA
+    "DESCRIPTION" "qcqj"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "JCQJ_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 150 50
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "hpsk"
+  METADATA
+    "DESCRIPTION" "hpsk"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "HPSK_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 0 255 0
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "hl"
+  METADATA
+    "DESCRIPTION" "hl"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "HL_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 200 100 255
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "gnq"
+  METADATA
+    "DESCRIPTION" "gnq"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "GNQ_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 200 67 89
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "gyld"
+  METADATA
+    "DESCRIPTION" "gyld"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "GYLD_region"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 32 43 14
+    END
+  END
+END # Layer
+  
+LAYER
+  NAME "xd"
+  METADATA
+    "DESCRIPTION" "xd"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "XD_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 32 43 32
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "tl"
+  METADATA
+    "DESCRIPTION" "tl"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "TL_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 65 21 32
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "sqzl"
+  METADATA
+    "DESCRIPTION" "sqzl"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "SQZL_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 32 87 43
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "sqdl"
+  METADATA
+    "DESCRIPTION" "sqdl"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "SQDL_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 230 23 29
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "ssd"
+  METADATA
+    "DESCRIPTION" "ssd"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "SSD_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 23 222 132
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "rxd"
+  METADATA
+    "DESCRIPTION" "rxd"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "RXD_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 123 32 90
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "qtdl"
+  METADATA
+    "DESCRIPTION" "qtdl"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "QTDL_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 192 93 23
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "gds"
+  METADATA
+    "DESCRIPTION" "gds"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "GDS_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 234 33 34
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "gd"
+  METADATA
+    "DESCRIPTION" "gd"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "GD_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 234 43 32
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "gsgls"
+  METADATA
+    "DESCRIPTION" "gsgls"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "GSGLS_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 23 233 38
+    END
+  END
+END # Layer
+
+LAYER
+  NAME "gjgl"
+  METADATA
+    "DESCRIPTION" "gjgl"
+  END
+  TYPE LINE
+  STATUS OFF
+  DATA "GJGL_polyline"
+  CLASS
+    NAME "Graticule"
+    STYLE
+      COLOR 90 0 255
+    END
+  END
+END # Layer
+END                         # End of MAP object and map file

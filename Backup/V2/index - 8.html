@@ -1,0 +1,202 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 100%;
+            border: 0px solid black;
+        }
+	body {
+	  padding:0px; 
+	  margin:0px
+	}
+	#labs {
+	 position:absolute;
+	 bottom:15px;
+	 left:7px;
+	 font-size:smaller;
+	 z-index: 5000;
+        }	 
+    </style>
+    <link rel="stylesheet" href="OpenLayers-2.13.1/theme/default/style.css" type="text/css">
+    <script src="OpenLayers-2.13.1/OpenLayers.js"></script>
+    <script type="text/javascript">
+        var map, layer;
+        var selectControl;
+        OpenLayers.Feature.Vector.style['default']['strokeWidth'] = '2';
+        function init(){       
+             map = new OpenLayers.Map(
+                  { 
+                     div: "map",
+                    //下面很重要，如果不设置，每个图片都按照BBOX:-180,-90,90-270这样的经纬度去找，对于用meters来做的mapfile是找不到图的，白屏
+                     maxExtent: new OpenLayers.Bounds(107.0,36.9,111.9,41.5),
+                     maxResolution: "auto",
+                     units: 'METERS',
+                     projection: "EPSG:4326",
+                     eventListeners: {
+                        featureover: function(e) {
+                            e.feature.renderIntent = "select";
+                            e.feature.layer.drawFeature(e.feature);
+                            log("Map says: Pointer entered " + e.feature.id + " on " + e.feature.layer.name);
+                        },
+                        featureout: function(e) {
+                            e.feature.renderIntent = "default";
+                            e.feature.layer.drawFeature(e.feature);
+                            log("Map says: Pointer left " + e.feature.id + " on " + e.feature.layer.name);
+                        },
+                        featureclick: function(e) {
+                            show("Map says: " + e.feature.id + " clicked on " + e.feature.layer.name);
+                        }
+                    }
+                   }
+             );
+
+                var layer = new OpenLayers.Layer.WMS( 
+              "OpenPlayer WMS",
+              "http://192.168.0.63:8001/cgi-bin/xmap.exe?VERSION=1.1.1&REQUEST=GetMap&STYLES=&SRS=EPSG%3A4326", 
+              {IMAGETYPE:'PNG'
+                ,Layers:"xz,s,qx,djs,dy,cz,p26ggcs,p25dxfw,p24fjms,p23ssxzf,p22qcfw,p21cyfw,p20zhxx,p19zzxq,p18gygc,p17gsqy,p16kyjy,p15ylfw,p14xxyl,p13bgjd,p12lshy,p11syds,p10jrfw,p09sfz,p08gsffq,p07tcc,p06jyzjqz,p04qcz,p02hczdtz,p02jc,p01zf,ssj,sj,qxj,qcqj,hpsk,hl,gnq,gyld,xd,tl,sqzl,sqdl,ssd,rxd,qtdl,gds,gd,gsgls,gjgl"
+                ,SRS:"EPSG:4326"}
+          );
+          map.addLayer(layer); 
+          //缩放级别，以maxExtent的左上角为基点缩放
+          map.setCenter(new OpenLayers.LonLat(109.77,38.3), 1);   
+          // new OpenLayers.Control.Permalink(), 
+          //     new OpenLayers.Control.PanZoomBar({}),  
+          map.addControls([
+                  new OpenLayers.Control.PanZoomBar({}), 
+                  new OpenLayers.Control.LayerSwitcher(),
+                  new OpenLayers.Control.MousePosition(),
+                  //new OpenLayers.Control.ScaleLine(),
+                  //new OpenLayers.Control.Scale(),
+                  //map.addControl(new OpenLayers.Control.Permalink('asopro')),
+                  new OpenLayers.Control.OverviewMap() 
+                ]);  
+          //map.addControl{new OpenLayers.Control.LayerSwitcher(),new OpenLayers.Control.MousePosition()} ;
+          //map.addControl( new OpenLayers.Control.MousePosition() );
+          
+          //initData(); //加载数据
+          initVector();
+        }
+        var layerListeners = {
+            featureclick: function(e) {
+                log(e.object.name + " says: " + e.feature.id + " clicked.");
+                return false;
+            },
+            nofeatureclick: function(e) {
+                log(e.object.name + " says: No feature clicked.");
+            }
+        };
+        
+        var style = new OpenLayers.StyleMap({
+            'default': OpenLayers.Util.applyDefaults(
+                {label: "${name}", pointRadius: 10},
+                OpenLayers.Feature.Vector.style["default"]
+            ),
+            'select': OpenLayers.Util.applyDefaults(
+                {pointRadius: 10},
+                OpenLayers.Feature.Vector.style.select
+            )
+        });
+        function initVector()
+        {
+            var layer1 = new OpenLayers.Layer.Vector("Layer 1", {
+                styleMap: style,
+                eventListeners: layerListeners
+            });
+            layer1.addFeatures([
+                new OpenLayers.Feature.Vector(OpenLayers.Geometry.fromWKT("POINT(109.589 37.568)"), {l:1,name:"ddd"}),
+                new OpenLayers.Feature.Vector(OpenLayers.Geometry.fromWKT("POINT(109.7836 37.789)"), {l:1,name:"ddddds"})
+            ]);
+            map.addLayer(layer1); 
+        }
+        
+        function createFeatures() {
+            var extent = map.getExtent();
+            var features = [];
+            for(var i=0; i<10; ++i) {
+                features.push(new OpenLayers.Feature.Vector(
+                    new OpenLayers.Geometry.Point(extent.left + (extent.right - extent.left) * Math.random(),
+                    extent.bottom + (extent.top - extent.bottom) * Math.random()
+                )));
+            }
+            return features;
+        }
+        
+        var myMarkers;
+        var dataSet;
+        
+        function addMarkers(data, mapBase, markersLayer) {
+            dataSet = data;
+            map = mapBase;
+        
+            if(myMarkers ==null){
+            
+             myMarkers = new OpenLayers.Layer.Vector("车");
+               map.addLayer(markers);
+            
+            }
+            myMarkers = markersLayer;
+            add();
+        }
+        
+        function add() {
+
+            var size = new OpenLayers.Size(30, 30);
+            var calculateOffset = function (size) {
+                return new OpenLayers.Pixel(-(size.w / 2), -(size.h / 2));
+            };
+        
+            //需要修改
+            for (var i = 0; i < dataSet.length; i++) {
+        
+                var d = {};
+                d.id = dataSet[i].VehicleID.toString();
+        
+                var num = Math.floor(dataSet[i].Direction / 5) * 5;
+        
+                var ic = "img/rain.png";
+                d.icon = new OpenLayers.Icon(
+                        ic,
+                        size, null, calculateOffset);
+        
+                var lonlat = new OpenLayers.LonLat(dataSet[i].Longitude,
+                                                     dataSet[i].Latitude);
+                var sHtml = "<div id=\"markerNews\">"
+                + "车牌号：" + dataSet[i].VehicleID + "<br />"
+                + "方向：" + Math.floor(dataSet[i].Direction / 5)*5 + "<br />"
+                + "速度："+dataSet[i].Speed+"<br />"
+                + "驾驶员：" + dataSet[i].DriverName + "<br />"
+                + "车辆类型：" + dataSet[i].VehicleModelName
+                + "</div>";
+                //end
+        
+                var feature = new OpenLayers.Feature(myMarkers, lonlat, d);
+                feature.closeBox = true;
+                feature.data.popupContentHTML = sHtml;
+        
+                var marker = feature.createMarker();
+                marker.events.register('click', feature, markerClick);
+                myMarkers.addMarker(marker);
+            }
+        
+            //    setTimeout(add, time);
+        }
+        
+        function showStatus(text) {
+            document.getElementById("status").innerHTML = text;            
+        }
+        
+        function log(msg) {
+            //alert(msg);
+        }
+        function show(msg) {
+            alert(msg);
+        }
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="map">
+    </div>
+  </body>
+</html>

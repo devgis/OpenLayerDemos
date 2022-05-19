@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Static Image</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.14.2/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.14.2/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      // Map views always need a projection.  Here we just want to map image
+      // coordinates directly to map coordinates, so we create a projection that uses
+      // the image extent in pixels.
+      var extent = [0, 0,  8623, 7218];
+      var projection = new ol.proj.Projection({
+        code: 'EPSG:4326', //xkcd-image
+        units: 'pixels',
+        extent: extent
+      });
+
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Image({
+            source: new ol.source.ImageStatic({
+              attributions: [
+                new ol.Attribution({
+                  html: '&copy; <a href="http://www.my.com">mygis</a>'
+                })
+              ],
+              url: 'map.jpg',
+              projection: projection,
+              imageExtent: extent
+            })
+          })
+        ],
+        target: 'map',
+        view: new ol.View({
+          projection: projection,
+          center: ol.extent.getCenter(extent),
+          zoom: 2,
+          maxZoom: 8
+        })
+      });
+    </script>
+  </body>
+</html>

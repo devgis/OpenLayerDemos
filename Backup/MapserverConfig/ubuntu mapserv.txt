@@ -1,0 +1,109 @@
+允许root用户ssh到主机
+1. 使用apt命令安装openssh server
+$ sudo apt-get install openssh-server
+2. 可以对 openssh server进行配置
+$ sudo vi /etc/ssh/sshd_config
+找到PermitRootLogin no一行，改为PermitRootLogin yes
+3. 重启 openssh server
+$ sudo service ssh restart
+4. 客户端如果是ubuntu的话，则已经安装好ssh client,可以用下面的命令连接远程服务器。
+$ ssh xxx.xxx.xxx.xxx
+------------------------------------------------------------------------------------------------------------------Mapserver6.4.1
+sudo apt-get update
+sudo apt-get upgrade
+sudo reboot
+sudo add-apt-repository ppa:nasaww/nasaww
+sudo apt-get install cgi-mapserver mapserver-bin gdal-bin
+/usr/lib/cgi-bin/mapserv -v 测试
+sudo apt-get install apache2
+sudo apt-get update
+sudo apt-get upgrade
+sudo reboot
+拷贝/usr/lib/cgi-bin到 /var/www/html
+执行
+sudo a2enmod cgi
+sudo service apache2 restart
+测试http://192.168.0.39/cgi-bin/mapserv?
+------------------------------------------------------------------------------------------------------------------Python2.5
+1下载源代码：
+wget http://www.python.org/ftp/python/2.5.2/Python-2.5.2.tar.bz2
+2. 解压压缩包：
+tar -jxvf Python-2.5.2.tar.bz2
+3. 安装python 2.5
+cd Python-2.5.2
+./configure
+make
+make install
+(
+如果make没有安装 ubuntu下使用sudo apt-get install make
+同时使用 sudo apt-get install gcc 安装gcc编译器
+)
+安装完成后，输入python，验证其安装成功与否。
+
+4. 修改默认版本：
+$ cd /usr/bin
+$ ll |grep python //查看该目录下python
+$ rm -rf python
+$ ln -s 安装目录前缀/Python-2.5.2/python ./python //可能需要root权限，可用sudo ...
+$ python -V
+
+至此，版本就修改完毕，变成了2.5.2了。
+
+
+------------------------------------------------------------------------------------------------------------------Mod_Python3.3.1
+安装：
+apt-get install apache2
+
+apt-get install libapache2-mod-python
+
+设置：
+
+允许Mod_Python
+
+cd /etc/apache2/mods-enabled/
+sudo ln -s ../mods-available/mod_python.load mod_python.load
+
+修改apache2配置文件
+cd /etc/apache2/sites-available/
+sudo gedit default
+
+On line 10 you should have:
+
+
+Options Indexes FollowSymLinks MultiViews
+AllowOverride AuthConfig
+Order allow,deny
+allow from all
+# Uncomment this directive is you want to see apache2's
+# default start page (in /apache2-default) when you go to /
+#RedirectMatch ^/$ /apache2-default/
+
+
+Change it to:
+
+
+Options Indexes FollowSymLinks MultiViews
+AllowOverride AuthConfig
+Order allow,deny
+allow from all
+
+AddHandler mod_python .py
+PythonHandler mod_python.publisher
+PythonDebug On
+
+# Uncomment this directive is you want to see apache2's
+# default start page (in /apache2-default) when you go to /
+#RedirectMatch ^/$ /apache2-default/
+
+
+重启apache2服务
+/etc/init.d/apache2 restart
+
+测试：
+gedit /var/www/test.py
+
+内容：
+def index(req):
+return "Test successful";
+补充:
+------------------------------------------------------------------------------------------------------------------TileCache2.1.1
